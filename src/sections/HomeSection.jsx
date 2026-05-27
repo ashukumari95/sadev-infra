@@ -11,7 +11,7 @@ const pageVariants = {
 };
 
 const itemVariants = {
-  initial: { opacity: 0, y: 10 }, // Reduced the jump distance
+  initial: { opacity: 0, y: 15 }, 
   animate: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
 };
 
@@ -40,16 +40,16 @@ export default function HomeSection({ setActiveTab }) {
       className="relative flex-1 flex flex-col items-center w-full min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      {/* Solid Dark Overlay for clean readability */}
-      <div className="absolute inset-0 bg-[#0A192F]/85 z-0"></div>
+      {/* Refined Overlay: Subtle gradient for depth without 3D effect, allows background to peek through gently */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0A192F]/80 via-[#0A192F]/85 to-[#0A192F]/95 z-0"></div>
 
       {/* Main Content Container */}
       <div className="relative flex-1 flex flex-col items-center justify-center text-center w-full max-w-5xl px-6 z-10 -mt-12">
         
-        {/* Title Section */}
+        {/* Title Section - Softened the boldness */}
         <motion.div variants={itemVariants} className="space-y-4">
-            <h1 className="text-4xl md:text-[64px] text-white leading-[1.05] mb-10 tracking-tight font-black">
-                <span className="opacity-80 font-medium block text-xl md:text-2xl tracking-[0.2em] uppercase mb-4">
+            <h1 className="text-4xl md:text-[56px] text-white leading-tight mb-8 tracking-wide font-bold">
+                <span className="opacity-75 font-medium block text-lg md:text-xl tracking-[0.15em] uppercase mb-3">
                     Building Solid Foundations for
                 </span>
                 <span>
@@ -58,18 +58,18 @@ export default function HomeSection({ setActiveTab }) {
             </h1>
         </motion.div>
         
-        {/* Call to Action Buttons - FLAT DESIGN */}
-        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 items-center">
+        {/* Call to Action Buttons - Elegant & Clean */}
+        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-5 items-center">
           <button 
             onClick={() => setActiveTab('Services')}
-            className="px-10 py-4 rounded-sm bg-[#F2A900] hover:bg-[#D99700] text-[#0A192F] font-bold text-sm tracking-widest uppercase transition-colors"
+            className="px-8 py-3.5 rounded-md bg-[#F2A900] hover:bg-[#E59400] text-[#0A192F] font-semibold text-sm tracking-wider uppercase transition-colors shadow-lg"
           >
             Explore Our Solutions
           </button>
           
           <button 
             onClick={() => setShowVideo(true)}
-            className="px-10 py-4 rounded-sm border border-white/30 bg-transparent text-white font-bold text-sm tracking-widest uppercase flex items-center gap-3 hover:bg-white/10 transition-colors"
+            className="px-8 py-3.5 rounded-md border border-white/30 hover:border-white/60 bg-white/5 backdrop-blur-sm text-white font-medium text-sm tracking-wider uppercase flex items-center gap-3 transition-colors"
           >
             <Play className="w-4 h-4 text-[#F2A900]" />
             Watch Overview
@@ -77,27 +77,27 @@ export default function HomeSection({ setActiveTab }) {
         </motion.div>
 
         {/* Industry Trust Section */}
-        <motion.div variants={itemVariants} className="mt-28 w-full">
-          <p className="text-white/50 text-xs uppercase tracking-[0.4em] font-medium mb-10">Trusted by Industry Leaders</p>
-          <div className="flex flex-wrap justify-center items-center gap-x-16 gap-y-8 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+        <motion.div variants={itemVariants} className="mt-24 w-full">
+          <p className="text-white/50 text-xs uppercase tracking-[0.3em] font-medium mb-8">Trusted by Industry Leaders</p>
+          <div className="flex flex-wrap justify-center items-center gap-x-14 gap-y-8 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
             {['BuildCorp', 'Skyline', 'UrbanTech', 'TerraForm', 'Apex'].map((brand) => (
               <div key={brand} className="flex items-center gap-2 cursor-default">
-                <ShieldCheck className="w-5 h-5 text-white/50" />
-                <span className="text-xl font-bold tracking-tight text-white/80">{brand}</span>
+                <ShieldCheck className="w-5 h-5 text-white/40" />
+                <span className="text-lg font-semibold tracking-wide text-white/80">{brand}</span>
               </div>
             ))}
           </div>
         </motion.div>
       </div>
 
-      {/* Sidebar Metrics - Clean Flat Boxes */}
+      {/* Sidebar Metrics - Soft Glass Look (Not bulky) */}
       <div className="hidden xl:block absolute right-10 top-1/2 -translate-y-1/2 z-20">
-        <div className="bg-[#0A192F]/90 rounded-none py-10 px-8 flex flex-col gap-12 border-l-2 border-[#F2A900]">
+        <div className="bg-[#0A192F]/60 backdrop-blur-md rounded-2xl py-10 px-8 flex flex-col gap-10 border border-white/10 shadow-xl">
           {metrics.map((metric, idx) => (
             <div key={idx} className="flex flex-col items-center cursor-default">
-              <metric.icon className="w-6 h-6 text-[#F2A900] mb-3" />
+              <metric.icon className="w-6 h-6 text-[#F2A900] mb-3 opacity-90" />
               <span className="text-2xl font-bold text-white leading-none mb-2">{metric.value}</span>
-              <span className="text-[10px] text-white/50 font-medium tracking-widest text-center uppercase">
+              <span className="text-[10px] text-white/60 font-medium tracking-widest text-center uppercase">
                 {metric.label.split(' ').join('\n')}
               </span>
             </div>
@@ -105,16 +105,18 @@ export default function HomeSection({ setActiveTab }) {
         </div>
       </div>
 
-      {/* WhatsApp Floating Component - Flat Minimal */}
-      <div className="fixed bottom-10 right-10 z-50">
+      {/* WhatsApp Floating Component - Softened */}
+      <div className="fixed bottom-8 right-8 z-50">
         <button 
           onClick={handleWhatsApp}
-          className="flex items-center gap-4 bg-[#0A192F] border border-white/20 text-white pl-4 pr-6 py-3 rounded-sm hover:bg-[#112240] transition-colors"
+          className="flex items-center gap-4 bg-[#0A192F]/90 backdrop-blur-sm border border-white/10 text-white pl-3 pr-6 py-2.5 rounded-full hover:bg-[#112240] transition-colors shadow-xl"
         >
-          <FaWhatsapp className="w-6 h-6 text-[#22c55e]" />
+          <div className="w-10 h-10 bg-[#22c55e] rounded-full flex items-center justify-center">
+            <FaWhatsapp className="w-5 h-5 text-white" />
+          </div>
           <div className="flex flex-col items-start">
-            <span className="text-[10px] text-white/50 uppercase tracking-widest leading-none mb-1">Have a project?</span>
-            <span className="text-xs uppercase tracking-widest font-bold text-[#F2A900]">Let's Talk</span>
+            <span className="text-[10px] text-white/60 uppercase tracking-wider leading-none mb-1">Have a project?</span>
+            <span className="text-xs uppercase tracking-wider font-bold text-[#F2A900]">Let's Talk</span>
           </div>
         </button>
       </div>
@@ -126,12 +128,12 @@ export default function HomeSection({ setActiveTab }) {
                 initial={{ opacity: 0 }} 
                 animate={{ opacity: 1 }} 
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-[200] bg-[#0A192F]/95 flex items-center justify-center p-6"
+                className="fixed inset-0 z-[200] bg-[#0A192F]/95 backdrop-blur-sm flex items-center justify-center p-6"
             >
                 <button onClick={() => setShowVideo(false)} className="absolute top-10 right-10 text-white/50 hover:text-[#F2A900] transition-colors">
                     <X className="w-10 h-10" />
                 </button>
-               <div className="w-full max-w-4xl aspect-video bg-black rounded-sm border border-white/10 flex items-center justify-center overflow-hidden relative">
+               <div className="w-full max-w-4xl aspect-video bg-black rounded-xl border border-white/10 flex items-center justify-center overflow-hidden relative shadow-2xl">
                   <video 
                       className="w-full h-full object-cover"
                       controls
