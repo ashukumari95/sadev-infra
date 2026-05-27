@@ -4,14 +4,14 @@ export default function Footer({ setActiveTab }) {
   const footerNav = [
     { name: 'Solutions', items: ['Engineering', 'Design', 'Digital'] },
     { name: 'Company', items: ['Our Story', 'Careers'] },
-    { name: 'Contact', items: ['Hyderabad', 'cdsinfrat@gmail.com'] },
+    { name: 'Contact', items: ['Hyderabad', 'sadevinfra@gmail.com'] },
   ];
 
   // 👉 Social links array add kiya hai jisme aapke diye hue URLs hain
   const socialLinks = [
-    { Icon: Facebook, url: 'https://www.facebook.com/share/18QEvJ8GyX/' },
-    { Icon: Twitter, url: 'https://x.com/CDSInfraTech' },
-    { Icon: Linkedin, url: 'https://www.linkedin.com/company/cds-infra-tech/' }
+    { Icon: Facebook, url: 'https://www.facebook.com/share/17nJJee7Tq/' },
+    { Icon: Twitter, url: 'https://x.com/Sadevinfra' },
+    { Icon: Linkedin, url: 'https://www.linkedin.com/company/sadev-infra/' }
   ];
 
   return (
@@ -77,7 +77,7 @@ export default function Footer({ setActiveTab }) {
               </div>
               <div className="flex items-center gap-2 justify-center md:justify-end">
                 <Mail className="w-3 h-3 text-[#ec4899] shrink-0" />
-                <span>cdsinfrat@gmail.com</span>
+                <span>sadevinfra@gmail.com</span>
               </div>
             </div>
           </div>
@@ -86,7 +86,7 @@ export default function Footer({ setActiveTab }) {
 
         {/* Bottom Bar */}
         <div className="pt-4 border-t border-gray-50 flex flex-col sm:flex-row justify-between items-center gap-3 text-[8px] font-bold uppercase tracking-wider text-gray-400">
-          <p>© 2026 Infra Tech Engineering & Technologies</p>
+          <p>© 2026 Infra Engineering & Technologies</p>
           <div className="flex items-center gap-1.5 group cursor-default">
             <ShieldCheck className="w-3 h-3 text-gray-300 group-hover:text-[#ec4899] transition-colors" />
             <span className="group-hover:text-gray-600 transition-colors">ISO 27001</span>
