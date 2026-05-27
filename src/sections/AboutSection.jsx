@@ -7,7 +7,7 @@ const pageVariants = {
   exit: { opacity: 0, y: -30 }
 };
 
-// Updated with new CDS Standard values and descriptions
+// Updated with new Sadev Standard values and descriptions
 const values = [
   { title: 'Architectural Precision', desc: 'Adhering to international engineering, structural safety, and execution protocols with zero margin for error.', icon: Globe },
   { title: 'Validated Frameworks', desc: 'An ISO 9001:2015 and certified digital solutions provider delivering predictable engineering outcomes.', icon: Award },
@@ -16,8 +16,8 @@ const values = [
 ];
 
 const testimonials = [
-  { name: 'Rajesh Khanna', role: 'CEO, BuildCorp India', text: 'CDS transformed our site monitoring. We saw a 25% increase in operational efficiency within just 3 months.', stars: 5 },
-  { name: 'Sarah Miller', role: 'Director, UrbanTech UK', text: 'The BIM integration provided by CDS is world-class. Their engineering depth and technical support are unmatched.', stars: 5 },
+  { name: 'Rajesh Khanna', role: 'CEO, BuildCorp India', text: 'Sadev transformed our site monitoring. We saw a 25% increase in operational efficiency within just 3 months.', stars: 5 },
+  { name: 'Sarah Miller', role: 'Director, UrbanTech UK', text: 'The BIM integration provided by Sadev is world-class. Their engineering depth and technical support are unmatched.', stars: 5 },
 ];
 
 export default function AboutSection() {
@@ -45,7 +45,7 @@ export default function AboutSection() {
           </h2>
           
           <p className="text-lg text-white/90 leading-relaxed mb-10 font-medium max-w-xl drop-shadow-md">
-            CDS Infra Tech was founded with a singular vision: to bridge the deep gap between heavy physical construction and high-velocity digital innovation. Today, we are a global leader in infrastructure technology. We don't just build structural frameworks; we design the intelligent digital ecosystems—from advanced BIM layers to real-time IoT networks—that power the world's most ambitious architectural marvels.
+            Sadev Infra Tech was founded with a singular vision: to bridge the deep gap between heavy physical construction and high-velocity digital innovation. Today, we are a global leader in infrastructure technology. We don't just build structural frameworks; we design the intelligent digital ecosystems—from advanced BIM layers to real-time IoT networks—that power the world's most ambitious architectural marvels.
           </p>
           
           <div className="flex flex-wrap gap-4 md:gap-6">
@@ -79,7 +79,7 @@ export default function AboutSection() {
       <div className="w-full mb-24 relative">
         <div className="text-center mb-16">
           <h3 className="text-2xl md:text-3xl font-black mb-4 text-white tracking-tight uppercase drop-shadow-md">
-            The <span className="text-pink-500">CDS Standard</span>
+            The <span className="text-pink-500">Sadev Standard</span>
           </h3>
           <p className="text-white/70 text-sm font-bold tracking-[0.3em] uppercase">Built on precision & innovation</p>
         </div>
@@ -104,7 +104,7 @@ export default function AboutSection() {
           Redefining <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8b5cf6] to-[#ec4899]">Asset Efficiency</span>
         </h3>
         <p className="text-lg text-white/80 leading-relaxed font-medium max-w-3xl mx-auto">
-          When premier construction enterprises and global developers partner with CDS Infra Tech, they aren't just hiring a tech vendor. They are integrating an engineering force that historically boosts site operational efficiency by 25% within the first quarter of deployment. We ensure your project is built to last, on budget, and fully intelligent.
+          When premier construction enterprises and global developers partner with Sadev Infra Tech, they aren't just hiring a tech vendor. They are integrating an engineering force that historically boosts site operational efficiency by 25% within the first quarter of deployment. We ensure your project is built to last, on budget, and fully intelligent.
         </p>
       </div>
 
