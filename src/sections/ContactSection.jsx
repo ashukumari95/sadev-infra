@@ -96,7 +96,7 @@ export default function ContactSection({ setActiveTab }) {
                 </div>
                 <div>
                   <p className="text-[10px] text-white/40 font-bold uppercase tracking-[0.2em] mb-1">Email Inquiry</p>
-                  <p className="text-lg font-bold text-white group-hover/item:text-[#F2A900] transition-colors">cdsinfrat@gmail.com</p>
+                  <p className="text-lg font-bold text-white group-hover/item:text-[#F2A900] transition-colors">sadevinfra@gmail.com</p>
                 </div>
               </a>
               {/* Location Block */}
