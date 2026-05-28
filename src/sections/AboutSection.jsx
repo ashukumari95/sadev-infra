@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { Globe, Award, Zap, ShieldCheck, Star, Quote, CheckCircle } from 'lucide-react';
+// 👇 1. Helmet Import kiya for SEO
+import { Helmet } from 'react-helmet-async';
 
 const pageVariants = {
   initial: { opacity: 0, y: 15 },
@@ -29,6 +31,13 @@ export default function AboutSection() {
       exit="exit"
       className="w-full flex flex-col items-center pt-10 pb-20 px-6 md:px-10 max-w-7xl mx-auto"
     >
+      {/* 👇 2. Helmet Meta Tags Add kiye */}
+      <Helmet>
+        <title>About Sadev Group | The Standard in EPC & Infrastructure</title>
+        <meta name="description" content="Learn about Sadev Group's legacy. We are an ISO-certified infrastructure enterprise specializing in heavy construction, structural safety, and BIM digital ecosystems in Hyderabad." />
+        <meta name="keywords" content="Sadev Group, infrastructure company Hyderabad, EPC contractors India, BIM digital ecosystems, heavy construction" />
+      </Helmet>
+
       {/* Hero Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20 items-center mb-32">
         <div className="order-2 lg:order-1">
@@ -38,12 +47,16 @@ export default function AboutSection() {
             <span className="text-[#F2A900] font-semibold tracking-[0.2em] uppercase text-[10px]">Our Legacy</span>
           </div>
           
-          <h2 className="text-4xl md:text-5xl xl:text-6xl font-bold mb-8 leading-tight text-white tracking-wide">
+          {/* 👇 3. Updated to H1 for SEO, added keywords implicitly */}
+          <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold mb-8 leading-tight text-white tracking-wide">
             Engineering the <br />
             <span className="text-[#F2A900]">
               Next Urban Frontier
             </span>
-          </h2>
+          </h1>
+          
+          {/* Hidden H2 for extra SEO juice */}
+          <h2 className="sr-only">Leading Infrastructure Company in Hyderabad delivering EPC and Digital Solutions</h2>
           
           <p className="text-lg text-white/80 leading-relaxed mb-10 font-medium max-w-xl">
             Sadev Group was founded with a singular vision: to bridge the deep gap between heavy physical construction and high-velocity digital innovation. Today, we are a leading force in infrastructure. We don't just build structural frameworks; we design the intelligent data ecosystems—from advanced BIM layers to real-time IoT networks—that power the world's most ambitious architectural marvels.
@@ -62,11 +75,11 @@ export default function AboutSection() {
         </div>
 
         <div className="relative order-1 lg:order-2">
-          {/* Image Container - Removed blur blobs, made edges professional (rounded-xl) */}
           <div className="relative rounded-xl overflow-hidden border border-white/10 group">
+            {/* 👇 4. Updated Image Alt Text for Image SEO */}
             <img 
               src="./about.png" 
-              alt="A team of structural engineers discussing blueprints on a modern construction site" 
+              alt="Sadev Group heavy infrastructure and EPC project engineers at construction site in Hyderabad" 
               className="w-full h-full object-cover grayscale-[0.4] opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
               referrerPolicy="no-referrer"
             />
