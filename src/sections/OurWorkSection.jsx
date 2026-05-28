@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, TrendingUp, Star, BadgeCheck, ChevronLeft, ChevronRight } from 'lucide-react';
+// 👇 1. Helmet Import kiya for SEO
+import { Helmet } from 'react-helmet-async';
 
 const containerVariants = {
   initial: { opacity: 0 },
@@ -9,18 +11,17 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 15 },
   animate: { opacity: 1, y: 0 },
 };
 
 export default function PortfolioSection() {
-
   const projects = [
     {
       id: 1,
       title: 'Construction Management Dashboard',
       cat: 'Digital',
-      location: 'Hyderabad,India',
+      location: 'Hyderabad, India',
       impact: '40% Faster Project Tracking',
       img: './image1.png',
       reviews: [
@@ -128,31 +129,43 @@ export default function PortfolioSection() {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="w-full flex flex-col items-center pt-5 pb-20 px-6 md:px-10 max-w-7xl mx-auto"
+      className="w-full flex flex-col items-center pt-10 pb-20 px-6 md:px-10 max-w-7xl mx-auto"
     >
+      {/* 👇 2. SEO Meta Tags Add kiye */}
+      <Helmet>
+        <title>Our Projects & Case Studies | Sadev Group</title>
+        <meta name="description" content="Explore Sadev Group's global portfolio of heavy infrastructure projects, BIM implementations, and EPC contracting case studies." />
+        <meta name="keywords" content="infrastructure projects, EPC case studies, Sadev Group portfolio, construction management examples, smart highway monitoring" />
+      </Helmet>
+
       {/* Header */}
       <div className="text-center mb-16">
+        {/* Flat Corporate Badge */}
         <motion.div
           variants={itemVariants}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-sm bg-[#F2A900]/10 border border-[#F2A900]/30 mb-6"
         >
-          <div className="w-2 h-2 rounded-full bg-pink-500 animate-pulse" />
-          <span className="text-white/70 font-bold tracking-[0.3em] uppercase text-[10px]">Our Impact</span>
+          <div className="w-2 h-2 rounded-full bg-[#F2A900]" />
+          <span className="text-[#F2A900] font-semibold tracking-[0.2em] uppercase text-[10px]">Our Impact</span>
         </motion.div>
 
-        <motion.h2
+        {/* 👇 3. Updated H1 for SEO with Gold Accent */}
+        <motion.h1
           variants={itemVariants}
-          className="text-4xl md:text-5xl font-black mb-8 tracking-tight text-white text-center"
+          className="text-4xl md:text-5xl font-bold mb-4 tracking-wide text-white text-center"
         >
           Global{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
+          <span className="text-[#F2A900]">
             Work
           </span>
-        </motion.h2>
+        </motion.h1>
+        
+        {/* Hidden H2 for extra SEO juice */}
+        <h2 className="sr-only">Sadev Group EPC and Digital Infrastructure Project Portfolio</h2>
       </div>
 
       {/* Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
         <AnimatePresence mode="popLayout">
           {projects.map((p, cardIdx) => {
             const activeIdx = activeReviews[cardIdx];
@@ -168,66 +181,60 @@ export default function PortfolioSection() {
                 layout
                 onMouseEnter={() => setHoveredCard(cardIdx)}
                 onMouseLeave={() => setHoveredCard(null)}
-                className="group relative flex flex-col rounded-2xl overflow-hidden border border-white/[0.08] bg-[#0f0f1c] hover:border-white/20 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+                className="group relative flex flex-col rounded-xl overflow-hidden border border-white/10 bg-[#0A192F]/60 hover:border-[#F2A900]/40 transition-colors cursor-pointer"
               >
                 {/* Image */}
-                <div className="relative h-44 overflow-hidden">
+                <div className="relative h-48 overflow-hidden border-b border-white/5">
+                  {/* 👇 4. Dynamic SEO Alt Text */}
                   <img
                     src={p.img}
-                    alt={p.title}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 opacity-75 group-hover:opacity-40"
+                    alt={`Sadev Group Project: ${p.title} deployed in ${p.location}`}
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 opacity-80 group-hover:opacity-40"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#0A192F]/60 to-transparent" />
 
-                  {/* Year — top left */}
-                  <div className="absolute top-3 left-3">
-                    <span className="text-[9px] font-bold px-2 py-1 rounded-full bg-black/40 backdrop-blur-sm text-white/60 border border-white/10">
-                      {p.year}
-                    </span>
-                  </div>
-
-                  {/* Impact badge — top right on hover */}
-                  <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-400 -translate-y-1 group-hover:translate-y-0">
-                    <div className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-purple-600/80 backdrop-blur-md border border-purple-400/30">
-                      <TrendingUp size={10} className="text-purple-200" />
-                      <p className="text-[9px] font-bold text-white">{p.impact}</p>
+                  {/* Impact badge — top right on hover (Gold Theme) */}
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-[#F2A900] shadow-lg">
+                      <TrendingUp size={12} className="text-[#0A192F]" />
+                      <p className="text-[10px] font-bold text-[#0A192F] uppercase tracking-wider">{p.impact}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* ✅ Card Body — fades out on hover */}
-                <div className="flex flex-col gap-2.5 p-5 flex-1 transition-all duration-300 group-hover:opacity-0 group-hover:pointer-events-none">
+                <div className="flex flex-col gap-3 p-6 flex-1 transition-all duration-300 group-hover:opacity-0 group-hover:pointer-events-none">
 
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                    <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm bg-[#F2A900]/10 text-[#F2A900] border border-[#F2A900]/20">
                       {p.cat}
                     </span>
-                    <span className="text-[10px] text-white/25">{p.reviews.length} reviews</span>
+                    <span className="text-[10px] font-medium text-white/40">{p.reviews.length} reviews</span>
                   </div>
 
-                  <h3 className="text-[15px] font-bold text-white leading-snug mt-0.5">{p.title}</h3>
+                  <h3 className="text-base font-bold text-white leading-snug mt-1 tracking-wide">{p.title}</h3>
 
-                  <div className="flex items-center gap-1.5 text-white/40 text-[11px]">
-                    <MapPin size={11} />
+                  <div className="flex items-center gap-2 text-white/50 text-xs font-medium">
+                    <MapPin size={12} className="text-[#F2A900]" />
                     {p.location}
                   </div>
 
-                  <div className="border-t border-white/[0.06] mt-1" />
+                  <div className="border-t border-white/10 mt-2" />
 
-                  <div className="flex items-center gap-0.5">
+                  <div className="flex items-center gap-1 mt-1">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <Star
                         key={i}
-                        size={11}
-                        className={i < review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-white/15 fill-white/15'}
+                        size={12}
+                        className={i < review.rating ? 'text-[#F2A900] fill-[#F2A900]' : 'text-white/10 fill-white/10'}
                       />
                     ))}
-                    <span className="text-[10px] text-white/30 ml-1.5">Client Review</span>
+                    <span className="text-[10px] font-medium text-white/40 ml-2">Client Review</span>
                   </div>
                 </div>
 
-                {/* ✅ Hover Review Overlay — slides up on hover */}
-                <div className="absolute inset-0 flex flex-col justify-end p-5 bg-gradient-to-t from-[#070712] via-[#07071295] to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out translate-y-2 group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
+                {/* ✅ Hover Review Overlay — Solid Navy Gradient */}
+                <div className="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-[#0A192F] via-[#0A192F]/95 to-[#0A192F]/60 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out pointer-events-none group-hover:pointer-events-auto">
 
                   <AnimatePresence mode="wait">
                     <motion.p
@@ -236,13 +243,13 @@ export default function PortfolioSection() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -6 }}
                       transition={{ duration: 0.3 }}
-                      className="text-[11px] text-white/75 italic leading-relaxed mb-4 line-clamp-3"
+                      className="text-xs text-white/80 italic leading-relaxed mb-6 font-medium line-clamp-4"
                     >
                       "{review.text}"
                     </motion.p>
                   </AnimatePresence>
 
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between border-t border-white/10 pt-4">
 
                     <AnimatePresence mode="wait">
                       <motion.div
@@ -251,53 +258,53 @@ export default function PortfolioSection() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 6 }}
                         transition={{ duration: 0.25 }}
-                        className="flex items-center gap-2.5"
+                        className="flex items-center gap-3"
                       >
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500/50 to-purple-600/50 border border-white/20 flex items-center justify-center flex-shrink-0">
-                          <span className="text-[9px] font-black text-white">{review.avatar}</span>
+                        <div className="w-10 h-10 rounded-lg bg-[#F2A900] flex items-center justify-center flex-shrink-0">
+                          <span className="text-xs font-bold text-[#0A192F]">{review.avatar}</span>
                         </div>
                         <div className="flex flex-col">
-                          <div className="flex items-center gap-1">
-                            <span className="text-[11px] font-bold text-white leading-none">{review.name}</span>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-xs font-bold text-white tracking-wide">{review.name}</span>
                             {review.verified && (
-                              <BadgeCheck size={11} className="text-blue-400 flex-shrink-0" />
+                              <BadgeCheck size={14} className="text-[#F2A900] flex-shrink-0" />
                             )}
                           </div>
-                          <span className="text-[9px] text-white/40 mt-0.5">{review.role}</span>
+                          <span className="text-[10px] font-medium text-[#F2A900] mt-0.5 uppercase tracking-widest">{review.role}</span>
                         </div>
                       </motion.div>
                     </AnimatePresence>
 
-                    {/* Dots + Arrows */}
-                    <div className="flex items-center gap-2">
-                      <div className="flex items-center gap-1">
+                    {/* Dots + Arrows (Gold Theme) */}
+                    <div className="flex flex-col items-end gap-3">
+                      <div className="flex gap-1">
+                        <button
+                          onClick={() => goReview(cardIdx, -1)}
+                          className="w-7 h-7 rounded-md bg-white/5 hover:bg-[#F2A900]/20 border border-white/10 hover:border-[#F2A900]/50 flex items-center justify-center transition-colors"
+                        >
+                          <ChevronLeft size={14} className="text-white/60 hover:text-[#F2A900]" />
+                        </button>
+                        <button
+                          onClick={() => goReview(cardIdx, 1)}
+                          className="w-7 h-7 rounded-md bg-white/5 hover:bg-[#F2A900]/20 border border-white/10 hover:border-[#F2A900]/50 flex items-center justify-center transition-colors"
+                        >
+                          <ChevronRight size={14} className="text-white/60 hover:text-[#F2A900]" />
+                        </button>
+                      </div>
+                      <div className="flex items-center gap-1.5">
                         {p.reviews.map((_, i) => (
                           <button
                             key={i}
                             onClick={() => setActiveReviews(prev =>
                               prev.map((v, idx) => idx === cardIdx ? i : v)
                             )}
-                            className={`rounded-full transition-all duration-300 ${
+                            className={`rounded-sm transition-all duration-300 ${
                               i === activeIdx
-                                ? 'w-3 h-1.5 bg-pink-500'
+                                ? 'w-4 h-1.5 bg-[#F2A900]'
                                 : 'w-1.5 h-1.5 bg-white/20 hover:bg-white/40'
                             }`}
                           />
                         ))}
-                      </div>
-                      <div className="flex gap-0.5">
-                        <button
-                          onClick={() => goReview(cardIdx, -1)}
-                          className="w-6 h-6 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center transition-all"
-                        >
-                          <ChevronLeft size={11} className="text-white/60" />
-                        </button>
-                        <button
-                          onClick={() => goReview(cardIdx, 1)}
-                          className="w-6 h-6 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center transition-all"
-                        >
-                          <ChevronRight size={11} className="text-white/60" />
-                        </button>
                       </div>
                     </div>
 
