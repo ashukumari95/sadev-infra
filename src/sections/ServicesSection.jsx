@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Code, TrendingUp, Zap, MessageCircle, MapPin, ArrowRight, CheckCircle2, Factory, HardHat, Building2, Users, ArrowUpRight } from 'lucide-react';
+// 👇 1. SEO ke liye Helmet import kiya
+import { Helmet } from 'react-helmet-async';
 
 const itemVariants = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 15 },
   animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] } },
 };
 
@@ -14,6 +16,7 @@ export default function ServicesSection({ setActiveTab }) {
     if (selectedService) window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [selectedService]);
 
+  // Removed rainbow colors, unified under Sadev Premium Theme
   const services = [
     {
       title: 'Project Management System',
@@ -21,8 +24,6 @@ export default function ServicesSection({ setActiveTab }) {
       icon: Building2,
       impact: '100% Project Visibility',
       details: ['Real-time project tracking', 'Task & milestone management', 'Multi-site control panel', 'Deadline & progress monitoring', 'Centralized dashboard'],
-      color: 'from-orange-500 to-yellow-500',
-      accent: 'orange',
       image: './image2.png',
     },
     {
@@ -31,8 +32,6 @@ export default function ServicesSection({ setActiveTab }) {
       icon: Users,
       impact: 'Efficient Workforce',
       details: ['Daily attendance tracking', 'Labour productivity reports', 'Role-based access system', 'Employee performance tracking', 'Payroll support system'],
-      color: 'from-blue-500 to-indigo-500',
-      accent: 'blue',
       image: './image3.png',
     },
     {
@@ -41,8 +40,6 @@ export default function ServicesSection({ setActiveTab }) {
       icon: HardHat,
       impact: 'Real-time Monitoring',
       details: ['Live site updates', 'Daily progress reports', 'Issue tracking system', 'Remote site monitoring', 'Supervisor dashboard'],
-      color: 'from-green-500 to-emerald-500',
-      accent: 'green',
       image: './image4.png',
     },
     {
@@ -51,8 +48,6 @@ export default function ServicesSection({ setActiveTab }) {
       icon: TrendingUp,
       impact: 'Cost Control',
       details: ['BOQ management', 'Invoice generation', 'Budget tracking', 'Expense reports', 'Financial insights'],
-      color: 'from-purple-500 to-pink-500',
-      accent: 'purple',
       image: './image5.png',
     },
     {
@@ -61,8 +56,6 @@ export default function ServicesSection({ setActiveTab }) {
       icon: Factory,
       impact: 'Zero Material Loss',
       details: ['Inventory tracking', 'Material usage reports', 'Stock alerts', 'Vendor management', 'Procurement tracking'],
-      color: 'from-red-500 to-orange-500',
-      accent: 'red',
       image: './image6.png',
     },
     {
@@ -71,16 +64,20 @@ export default function ServicesSection({ setActiveTab }) {
       icon: Code,
       impact: 'Smart Decisions',
       details: ['Real-time dashboards', 'Performance analytics', 'Custom reports', 'Data visualization', 'Decision support system'],
-      color: 'from-cyan-500 to-blue-500',
-      accent: 'cyan',
       image: './image7.png',
     },
   ];
 
   return (
     <motion.div className="w-full max-w-7xl mx-auto px-4 md:px-6 pb-20">
-      <AnimatePresence mode="wait">
+      {/* 👇 2. Helmet Meta Tags Add kiye */}
+      <Helmet>
+        <title>Construction & EPC Services | Sadev Group</title>
+        <meta name="description" content="Explore Sadev Group's specialized infrastructure services including BIM management, real-time site monitoring, BOQ management, and smart labor tracking in India." />
+        <meta name="keywords" content="EPC services, construction project management, BIM engineering, BOQ management, site monitoring, Sadev Group" />
+      </Helmet>
 
+      <AnimatePresence mode="wait">
         {/* ── Services List ── */}
         {!selectedService ? (
           <motion.div
@@ -92,68 +89,74 @@ export default function ServicesSection({ setActiveTab }) {
           >
             {/* Header */}
             <div className="text-center mb-16">
-              <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-5">
-                <div className="w-2 h-2 rounded-full bg-pink-500 animate-pulse" />
-                <span className="text-white/60 font-bold tracking-[0.3em] uppercase text-[10px]">What We Build</span>
+              {/* Flat Corporate Badge */}
+              <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-sm bg-[#F2A900]/10 border border-[#F2A900]/30 mb-5">
+                <div className="w-2 h-2 rounded-full bg-[#F2A900]" />
+                <span className="text-[#F2A900] font-semibold tracking-[0.2em] uppercase text-[10px]">What We Build</span>
               </motion.div>
-              <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-black tracking-tight text-white mb-4">
-                Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">Services</span>
-              </motion.h2>
-              <motion.p variants={itemVariants} className="text-white/40 max-w-xl mx-auto text-sm leading-relaxed">
-                End-to-end digital solutions built specifically for the construction industry.
+              
+              {/* 👇 3. Updated H1 and H2 for SEO */}
+              <motion.h1 variants={itemVariants} className="text-4xl md:text-5xl font-bold tracking-wide text-white mb-4">
+                Our <span className="text-[#F2A900]">Services</span>
+              </motion.h1>
+              <h2 className="sr-only">Comprehensive EPC, BIM, and Construction Management Services</h2>
+              
+              <motion.p variants={itemVariants} className="text-white/60 max-w-xl mx-auto text-sm font-medium leading-relaxed">
+                End-to-end digital and physical engineering solutions built specifically for heavy infrastructure.
               </motion.p>
             </div>
 
-            {/* Cards Grid — clean uniform size */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Cards Grid — Elegant Corporate Style */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.map((s, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
                   onClick={() => setSelectedService(s)}
-                  className="group relative flex flex-col rounded-2xl overflow-hidden border border-white/[0.08] bg-[#0f0f1c] hover:border-white/20 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] cursor-pointer"
+                  className="group relative flex flex-col rounded-xl overflow-hidden border border-white/10 bg-[#0A192F]/60 hover:border-[#F2A900]/40 transition-colors cursor-pointer"
                 >
                   {/* Image */}
-                  <div className="relative h-40 overflow-hidden">
+                  <div className="relative h-44 overflow-hidden border-b border-white/5">
+                    {/* 👇 4. Optimized Image Alt Text */}
                     <img
                       src={s.image}
-                      alt={s.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-80"
+                      alt={`Sadev Group ${s.title} - Heavy Infrastructure Solutions`}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-100"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f1c] via-[#0f0f1c]/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F] via-[#0A192F]/20 to-transparent" />
 
-                    {/* Impact pill */}
-                    <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-y-1 group-hover:translate-y-0">
-                      <div className={`flex items-center gap-1 px-2.5 py-1 rounded-lg bg-gradient-to-r ${s.color} bg-opacity-80 backdrop-blur-md`}>
-                        <TrendingUp size={9} className="text-white" />
-                        <span className="text-[9px] font-bold text-white">{s.impact}</span>
+                    {/* Impact pill - Solid Gold */}
+                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-[#F2A900] shadow-lg">
+                        <TrendingUp size={12} className="text-[#0A192F]" />
+                        <span className="text-[10px] font-bold text-[#0A192F] uppercase tracking-wider">{s.impact}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Body */}
-                  <div className="flex flex-col gap-3 p-5 flex-1">
+                  <div className="flex flex-col gap-4 p-6 flex-1">
                     {/* Icon + Title */}
-                    <div className="flex items-center gap-3">
-                      <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${s.color} flex items-center justify-center flex-shrink-0 shadow-lg`}>
-                        <s.icon size={16} className="text-white" />
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-lg bg-[#F2A900]/10 border border-[#F2A900]/20 flex items-center justify-center flex-shrink-0 group-hover:bg-[#F2A900]/20 transition-colors">
+                        <s.icon size={18} className="text-[#F2A900]" />
                       </div>
-                      <h3 className="text-[14px] font-bold text-white leading-snug">{s.title}</h3>
+                      <h3 className="text-base font-bold text-white leading-snug tracking-wide">{s.title}</h3>
                     </div>
 
                     {/* Desc */}
-                    <p className="text-[11px] text-white/45 leading-relaxed line-clamp-2">{s.desc}</p>
+                    <p className="text-sm text-white/60 font-medium leading-relaxed line-clamp-2">{s.desc}</p>
 
-                    <div className="border-t border-white/[0.06] mt-auto pt-3 flex items-center justify-between">
-                      <div className="flex flex-wrap gap-1">
+                    <div className="border-t border-white/10 mt-auto pt-4 flex items-center justify-between">
+                      <div className="flex flex-wrap gap-2">
                         {s.details.slice(0, 2).map((d, idx) => (
-                          <span key={idx} className="text-[9px] px-2 py-0.5 rounded-full bg-white/5 text-white/40 border border-white/[0.06]">
+                          <span key={idx} className="text-[10px] font-semibold px-2.5 py-1 rounded-sm bg-white/5 text-white/50 border border-white/10">
                             {d}
                           </span>
                         ))}
                       </div>
-                      <div className="w-7 h-7 rounded-xl bg-white/5 group-hover:bg-white/15 border border-white/10 flex items-center justify-center transition-all flex-shrink-0 ml-2">
-                        <ArrowUpRight size={12} className="text-white/50 group-hover:text-white transition-colors" />
+                      <div className="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-[#F2A900] border border-white/10 group-hover:border-[#F2A900] flex items-center justify-center transition-colors flex-shrink-0 ml-2">
+                        <ArrowUpRight size={14} className="text-white/50 group-hover:text-[#0A192F] transition-colors" />
                       </div>
                     </div>
                   </div>
@@ -164,71 +167,71 @@ export default function ServicesSection({ setActiveTab }) {
 
         ) : (
 
-          /* ── Service Detail ── */
+          /* ── Service Detail View ── */
           <motion.div
             key="detail"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] } }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] } }}
             exit={{ opacity: 0, y: -20 }}
             className="w-full"
           >
             {/* Back button */}
             <button
               onClick={() => setSelectedService(null)}
-              className="flex items-center gap-2 mb-6 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white/60 hover:text-white hover:bg-white/10 transition-all text-xs font-bold tracking-widest uppercase"
+              className="flex items-center gap-2 mb-8 px-4 py-2 rounded-md bg-white/5 border border-white/10 text-white/60 hover:text-[#F2A900] hover:border-[#F2A900]/50 transition-colors text-xs font-bold tracking-widest uppercase"
             >
-              <ArrowRight size={12} className="rotate-180" />
+              <ArrowRight size={14} className="rotate-180" />
               Back to Services
             </button>
 
-            <div className="rounded-2xl overflow-hidden border border-white/[0.08] bg-[#0f0f1c]">
+            <div className="rounded-xl overflow-hidden border border-white/10 bg-[#0A192F]/60">
 
               {/* Hero image */}
-              <div className="relative h-52 md:h-72 overflow-hidden">
+              <div className="relative h-64 md:h-80 overflow-hidden border-b border-white/10">
                 <motion.img
-                  initial={{ scale: 1.1 }}
+                  initial={{ scale: 1.05 }}
                   animate={{ scale: 1 }}
-                  transition={{ duration: 1.2 }}
+                  transition={{ duration: 0.8 }}
                   src={selectedService.image}
-                  alt={selectedService.title}
-                  className="w-full h-full object-cover opacity-50"
+                  alt={`Detailed view of ${selectedService.title} by Sadev Group`}
+                  className="w-full h-full object-cover opacity-60"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f1c] via-[#0f0f1c]/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F] via-[#0A192F]/40 to-transparent" />
 
                 {/* Title overlay */}
-                <div className="absolute bottom-6 left-6 md:left-8 flex items-center gap-4">
-                  <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${selectedService.color} flex items-center justify-center shadow-xl`}>
-                    <selectedService.icon size={22} className="text-white" />
+                <div className="absolute bottom-8 left-8 md:left-10 flex items-center gap-5">
+                  <div className="w-14 h-14 rounded-lg bg-[#F2A900] flex items-center justify-center shadow-lg">
+                    <selectedService.icon size={26} className="text-[#0A192F]" />
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/50 mb-1">{selectedService.impact}</p>
-                    <h3 className="text-2xl md:text-3xl font-black text-white tracking-tight">{selectedService.title}</h3>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#F2A900] mb-1.5">{selectedService.impact}</p>
+                    <h3 className="text-3xl md:text-4xl font-bold text-white tracking-wide">{selectedService.title}</h3>
                   </div>
                 </div>
               </div>
 
               {/* Content */}
-              <div className="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="p-8 md:p-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
 
                 {/* Left — desc + features */}
-                <div className="lg:col-span-2 flex flex-col gap-6">
-                  <p className="text-white/60 text-sm leading-relaxed">{selectedService.desc}</p>
+                <div className="lg:col-span-2 flex flex-col gap-8">
+                  <p className="text-white/80 text-base font-medium leading-relaxed">{selectedService.desc}</p>
 
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/30 mb-4">What's Included</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/40 mb-5">What's Included</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {selectedService.details.map((detail, idx) => (
                         <motion.div
                           key={idx}
-                          initial={{ opacity: 0, x: -8 }}
+                          initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.05 * idx }}
-                          className="flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:border-white/15 hover:bg-white/[0.06] transition-all group"
+                          className="flex items-center gap-4 p-4 rounded-md bg-white/5 border border-white/10 hover:border-[#F2A900]/30 transition-colors"
                         >
-                          <div className={`w-6 h-6 rounded-lg bg-gradient-to-br ${selectedService.color} flex items-center justify-center flex-shrink-0 opacity-80 group-hover:opacity-100`}>
-                            <CheckCircle2 size={12} className="text-white" />
+                          <div className="w-6 h-6 rounded-full bg-[#F2A900]/10 flex items-center justify-center flex-shrink-0">
+                            <CheckCircle2 size={14} className="text-[#F2A900]" />
                           </div>
-                          <span className="text-white/60 group-hover:text-white/90 transition-colors text-xs font-medium">{detail}</span>
+                          <span className="text-white/80 text-sm font-medium">{detail}</span>
                         </motion.div>
                       ))}
                     </div>
@@ -236,24 +239,24 @@ export default function ServicesSection({ setActiveTab }) {
                 </div>
 
                 {/* Right — CTA */}
-                <div className="flex flex-col gap-3">
-                  <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex flex-col gap-4">
+                <div className="flex flex-col gap-4">
+                  <div className="p-8 rounded-xl bg-white/5 border border-white/10 flex flex-col gap-6">
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/30 mb-2">Ready to start?</p>
-                      <h4 className="text-lg font-black text-white leading-snug">Let's build something great together</h4>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 mb-2">Ready to start?</p>
+                      <h4 className="text-xl font-bold text-white leading-snug">Let's build something great together</h4>
                     </div>
-                    <p className="text-xs text-white/40 leading-relaxed">Our specialists are ready to architect your next phase of growth.</p>
+                    <p className="text-sm font-medium text-white/60 leading-relaxed">Our specialists are ready to architect your next phase of infrastructure growth.</p>
 
                     <button
                       onClick={() => setActiveTab('Contact')}
-                      className={`w-full py-3.5 rounded-xl bg-gradient-to-r ${selectedService.color} text-white font-black tracking-[0.15em] uppercase text-[10px] hover:-translate-y-0.5 hover:shadow-lg transition-all`}
+                      className="w-full py-4 rounded-md bg-[#F2A900] hover:bg-[#E59400] text-[#0A192F] font-bold tracking-[0.1em] uppercase text-xs transition-colors"
                     >
                       Request Consultation
                     </button>
 
                     <button
                       onClick={() => setActiveTab('Our Work')}
-                      className="w-full py-3.5 rounded-xl border border-white/10 text-white/60 font-bold tracking-[0.15em] uppercase text-[10px] hover:bg-white/5 hover:text-white/80 transition-all"
+                      className="w-full py-4 rounded-md border border-white/20 text-white font-bold tracking-[0.1em] uppercase text-xs hover:bg-white/10 transition-colors"
                     >
                       View Case Studies
                     </button>
