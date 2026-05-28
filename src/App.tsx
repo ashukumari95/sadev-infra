@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 
 import HomeSection from "./sections/HomeSection";
 import ServicesSection from "./sections/ServicesSection";
@@ -49,7 +49,7 @@ export default function App() {
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
-  // 👉 Common Tab Change Logic (Ab dono Desktop aur Mobile isi ko use karenge)
+  // 👉 Common Tab Change Logic
   const changeTab = useCallback((deltaY, target) => {
     if (isScrolling.current) return;
 
@@ -65,7 +65,7 @@ export default function App() {
     }
 
     const currentIndex = tabsOrder.indexOf(activeTab);
-    const threshold = 40; // Threshold thoda kam kiya mobile sensitivity ke liye
+    const threshold = 40; 
 
     if (Math.abs(deltaY) < threshold) return;
 
@@ -99,16 +99,12 @@ export default function App() {
   // 👉 Mobile Touch End Handler
   const handleTouchEnd = useCallback((e) => {
     touchEndY.current = e.changedTouches[0].clientY;
-    // Calculate swipe distance (Positive means user swiped UP / scrolled down)
     const deltaY = touchStartY.current - touchEndY.current; 
     changeTab(deltaY, e.target);
   }, [changeTab]);
 
   useEffect(() => {
-    // Desktop Event
     window.addEventListener("wheel", handleWheel, { passive: false });
-    
-    // Mobile Events (Naya logic yahan active hua)
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
     window.addEventListener("touchend", handleTouchEnd, { passive: true });
 
@@ -121,25 +117,28 @@ export default function App() {
 
   return (
     <div 
-      // h-screen ki jagah h-[100dvh] use kiya taaki mobile browsers me perfect fit aaye
-      className="relative h-[100dvh] w-full bg-[#0a0a16] text-white overflow-hidden bg-cover bg-center bg-no-repeat"
+      // Sadev Navy Blue Background applied here
+      className="relative h-[100dvh] w-full bg-[#0A192F] text-white overflow-hidden bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <div className="absolute inset-0 bg-black/70 z-0"></div>
+      {/* Sadev Theme Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0A192F]/80 via-[#0A192F]/85 to-[#0A192F]/95 z-0"></div>
 
+      {/* 🔴 YAHAN THI PINK LINE - FIXED TO SADEV GOLD 🔴 */}
       <div 
         onClick={() => setActiveTab("Home")}
-        className="fixed top-8 left-10 z-[110] flex flex-col items-center gap-1 group cursor-pointer"
+        className="fixed top-8 left-6 md:left-10 z-[110] flex flex-col items-center gap-1 group cursor-pointer"
       >
         <img
           src="/logo.png"
-          alt="CDS Logo"
-          className="h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+          alt="Sadev Group Logo"
+          className="h-10 md:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
         />
         <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/70">
-          Infra Tech
+          Sadev Group
         </span>
-        <div className="w-8 h-0.5 bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] rounded-full mt-1 group-hover:w-full transition-all duration-500"></div>
+        {/* Ye wali line pink/purple thi, isko pure Solid Gold kar diya gaya hai */}
+        <div className="w-8 h-[3px] bg-[#F2A900] rounded-full mt-1 group-hover:w-full transition-all duration-500"></div>
       </div>
 
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
