@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Play, X, TrendingUp, Users, MapPin, Globe, ShieldCheck } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
+// 👇 1. Helmet Import kiya for SEO
+import { Helmet } from 'react-helmet-async';
 import backgroundImage from '/background.jpg';
 
 const pageVariants = {
@@ -20,7 +22,7 @@ export default function HomeSection({ setActiveTab }) {
 
   const handleWhatsApp = () => {
     const phoneNumber = "918955957893";
-    const message = encodeURIComponent("Hello Sadev Group, I would like to inquire about your infrastructure solutions.");
+    const message = encodeURIComponent("Hello Sadev Group, I would like to inquire about your heavy infrastructure solutions.");
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
   };
 
@@ -40,6 +42,13 @@ export default function HomeSection({ setActiveTab }) {
       className="relative flex-1 flex flex-col items-center w-full min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
+      {/* 👇 2. Helmet Meta Tags Add kiye */}
+      <Helmet>
+        <title>Sadev Group | Premier Heavy Infrastructure & EPC Contractors</title>
+        <meta name="description" content="Sadev Group delivers world-class heavy infrastructure, BIM engineering, and smart construction solutions in Hyderabad, India. Bridging physical engineering with digital innovation." />
+        <meta name="keywords" content="EPC contractors, heavy infrastructure, BIM integration, construction company Hyderabad, smart city development" />
+      </Helmet>
+
       {/* Refined Overlay: Subtle gradient for depth without 3D effect, allows background to peek through gently */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0A192F]/80 via-[#0A192F]/85 to-[#0A192F]/95 z-0"></div>
 
@@ -48,14 +57,16 @@ export default function HomeSection({ setActiveTab }) {
         
         {/* Title Section - Softened the boldness */}
         <motion.div variants={itemVariants} className="space-y-4">
+            {/* 👇 3. Updated Main Text to be a proper H1 and H2 structure for Google */}
             <h1 className="text-4xl md:text-[56px] text-white leading-tight mb-8 tracking-wide font-bold">
                 <span className="opacity-75 font-medium block text-lg md:text-xl tracking-[0.15em] uppercase mb-3">
-                    Building Solid Foundations for
+                    Top EPC Contractors & Developers
                 </span>
                 <span>
-                    INFRASTRUCTURE <span className="text-[#F2A900]">SUCCESS</span>
+                    HEAVY INFRASTRUCTURE <span className="text-[#F2A900]">SOLUTIONS</span>
                 </span>
             </h1>
+            <h2 className="sr-only">BIM Engineering, Smart City Development, and EPC Contracting in Hyderabad</h2>
         </motion.div>
         
         {/* Call to Action Buttons - Elegant & Clean */}
