@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle, Mail, MapPin, ExternalLink, Send, CheckCircle2 } from 'lucide-react';
+// 👇 1. Helmet Import kiya for SEO
+import { Helmet } from 'react-helmet-async';
 
 const pageVariants = {
   initial: { opacity: 0, y: 15 },
@@ -24,14 +26,22 @@ export default function ContactSection({ setActiveTab }) {
       exit="exit"
       className="w-full pt-10 pb-10 px-6 md:px-10 max-w-7xl mx-auto z-10"
     >
+      {/* 👇 2. SEO Meta Tags Add kiye */}
+      <Helmet>
+        <title>Contact Sadev Group | EPC & Infrastructure Contracting</title>
+        <meta name="description" content="Get in touch with Sadev Group's engineering team. Discuss your next heavy infrastructure, EPC contracting, or digital construction project. Corporate office in HITEC City, Hyderabad." />
+        <meta name="keywords" content="Contact Sadev Group, EPC contractors Hyderabad, infrastructure company contact, construction business inquiries" />
+      </Helmet>
+
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 w-full mb-20">
         
         {/* Contact Form Container - Flat Corporate Design */}
         <div className="flex-1 bg-[#0A192F]/60 border border-white/10 p-8 md:p-12 rounded-xl shadow-xl relative overflow-hidden">
           
-          <h2 className="text-3xl font-bold mb-8 text-white tracking-wide">
+          {/* 👇 3. Main Heading ko H1 banaya SEO ke liye */}
+          <h1 className="text-3xl font-bold mb-8 text-white tracking-wide">
             Get in <span className="text-[#F2A900]">Touch</span>
-          </h2>
+          </h1>
           
           {isSubmitted ? (
             <motion.div 
@@ -90,7 +100,7 @@ export default function ContactSection({ setActiveTab }) {
                 </div>
               </a>
               {/* Email Block */}
-              <a href="mailto:cdsinfrat@gmail.com" className="flex items-center gap-6 group/item">
+              <a href="mailto:sadevinfra@gmail.com" className="flex items-center gap-6 group/item">
                 <div className="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center group-hover/item:bg-[#F2A900]/20 transition-colors border border-white/5 group-hover/item:border-[#F2A900]/50">
                   <Mail className="w-5 h-5 text-white group-hover/item:text-[#F2A900] transition-colors" />
                 </div>
@@ -114,9 +124,10 @@ export default function ContactSection({ setActiveTab }) {
           
           {/* Visual Map Tile - Flat Corners */}
           <div className="h-56 rounded-xl overflow-hidden border border-white/10 relative group shadow-xl">
+            {/* 👇 4. Optimized Map Image Alt Text */}
             <img 
               src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=800&auto=format&fit=crop" 
-              alt="Hyderabad Map View" 
+              alt="Sadev Group Corporate Office Location Map in HITEC City, Hyderabad" 
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-70 grayscale hover:grayscale-0"
               referrerPolicy="no-referrer"
             />
