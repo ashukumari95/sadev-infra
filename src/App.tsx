@@ -15,41 +15,46 @@ import backgroundImage from "/background.jpg";
 
 const tabsOrder = ["Home", "Services", "Our Work", "About", "Contact"];
 
-export default function App() {
-  const getInitialTab = () => {
-    const hash = decodeURIComponent(window.location.hash.replace('#', ''));
-    return tabsOrder.includes(hash) ? hash : "Home";
-  };
+// 👉 Naya URL Format Logic
+const formatPath = (tab) => {
+  if (tab === "Home") return "/"; // Home ke aage kuch nahi dikhega
+  return `/${tab.toLowerCase().replace(' ', '-')}`; // Space ko dash me badlega (e.g., /our-work)
+};
 
+const getInitialTab = () => {
+  const path = window.location.pathname;
+  if (path === "/") return "Home";
+  
+  const formattedPath = path.replace('/', '').replace('-', ' ').toLowerCase();
+  const match = tabsOrder.find(tab => tab.toLowerCase() === formattedPath);
+  return match || "Home";
+};
+
+export default function App() {
   const [activeTab, setActiveTab] = useState(getInitialTab);
   const isScrolling = useRef(false);
 
-  // 👉 Mobile Swipe Variables
   const touchStartY = useRef(0);
   const touchEndY = useRef(0);
 
-  // URL Hash Sync for Browser Back Button
+  // 👉 Naya URL Sync Logic (Bina # ke)
   useEffect(() => {
-    const currentHash = decodeURIComponent(window.location.hash.replace('#', ''));
-    if (currentHash !== activeTab) {
-      window.history.pushState(null, "", `#${activeTab}`);
+    const expectedPath = formatPath(activeTab);
+    const currentPath = window.location.pathname;
+    
+    if (currentPath !== expectedPath) {
+      window.history.pushState(null, "", expectedPath);
     }
   }, [activeTab]);
 
   useEffect(() => {
     const handlePopState = () => {
-      const hash = decodeURIComponent(window.location.hash.replace('#', ''));
-      if (tabsOrder.includes(hash)) {
-        setActiveTab(hash);
-      } else if (!hash) {
-        setActiveTab("Home");
-      }
+      setActiveTab(getInitialTab());
     };
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
-  // 👉 Common Tab Change Logic
   const changeTab = useCallback((deltaY, target) => {
     if (isScrolling.current) return;
 
@@ -86,17 +91,14 @@ export default function App() {
     }
   }, [activeTab]);
 
-  // Desktop Mouse Wheel Handler
   const handleWheel = useCallback((e) => {
     changeTab(e.deltaY, e.target);
   }, [changeTab]);
 
-  // 👉 Mobile Touch Start Handler
   const handleTouchStart = useCallback((e) => {
     touchStartY.current = e.targetTouches[0].clientY;
   }, []);
 
-  // 👉 Mobile Touch End Handler
   const handleTouchEnd = useCallback((e) => {
     touchEndY.current = e.changedTouches[0].clientY;
     const deltaY = touchStartY.current - touchEndY.current; 
@@ -117,14 +119,11 @@ export default function App() {
 
   return (
     <div 
-      // Sadev Navy Blue Background applied here
       className="relative h-[100dvh] w-full bg-[#0A192F] text-white overflow-hidden bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      {/* Sadev Theme Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0A192F]/80 via-[#0A192F]/85 to-[#0A192F]/95 z-0"></div>
 
-      {/* 🔴 YAHAN THI PINK LINE - FIXED TO SADEV GOLD 🔴 */}
       <div 
         onClick={() => setActiveTab("Home")}
         className="fixed top-8 left-6 md:left-10 z-[110] flex flex-col items-center gap-1 group cursor-pointer"
@@ -137,7 +136,6 @@ export default function App() {
         <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/70">
           Sadev Group
         </span>
-        {/* Ye wali line pink/purple thi, isko pure Solid Gold kar diya gaya hai */}
         <div className="w-8 h-[3px] bg-[#F2A900] rounded-full mt-1 group-hover:w-full transition-all duration-500"></div>
       </div>
 
